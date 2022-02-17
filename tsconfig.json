@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    // For Cloudflare Workers
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": ["esnext"],
+    "types": ["@cloudflare/workers-types", "geojson"],
+
+    // For Slshx JSX
+    "jsx": "react",
+    "jsxFactory": "createElement",
+    "jsxFragmentFactory": "Fragment",
+
+    // Required by esbuild
+    "isolatedModules": true,
+
+    "noEmit": true,
+    "strict": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+  },
+  "include": [
+    "src",
+    "types"
+  ]
+}

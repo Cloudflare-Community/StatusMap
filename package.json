@@ -1,0 +1,16 @@
+{
+	"scripts": {
+		"build": "esbuild src/index.ts --format=esm --target=esnext --bundle --minify --loader:.html=text --loader:.css=text --outfile=dist/index.mjs",
+		"dev": "miniflare -mw dist/index.mjs"
+	},
+	"dependencies": {
+		"itty-router": "^2.4.10",
+		"miniflare": "^2.3.0",
+		"wrangler": "^0.0.17"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^3.4.0",
+		"@types/geojson": "^7946.0.8",
+		"esbuild": "^0.14.22"
+	}
+}
