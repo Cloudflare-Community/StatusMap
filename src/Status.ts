@@ -13,7 +13,7 @@ function generateGeoJSON(status : FullStatus) : GeoJSONResponse {
     red: { "type": "geojson", data: { type: "FeatureCollection", features: [] } }
   };
   for(const [iata, colo] of Object.entries(status)) {
-    const feature = { type: "Feature", properties: { description: `<strong>${colo.name}</strong><br/>${colo.status}<p>` }, geometry: { type: "Point", coordinates: [colo.location.lon, colo.location.lat] } };
+    const feature = { type: "Feature", properties: { description: `<strong>${colo.name}</strong><br/>${colo.status.split("_").map(e => e[0].toUpperCase() + e.substring(1)).join(" ")}<p>` }, geometry: { type: "Point", coordinates: [colo.location.lon, colo.location.lat] } };
     switch(colo.status) {
       case "operational":
         features.green.data.features.push(feature);

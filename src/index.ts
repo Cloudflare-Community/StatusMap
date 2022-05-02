@@ -11,10 +11,9 @@ router.get("/cflogo.png", async () => fetch("https://cloudflare.community/images
 router.get("/status", async (req: Request, env: Environment) => {
   let status : GeoJSONResponse | null = await env.KV.get("status",{type:"json"});
   if(!status) {
-    console.log("Fetching Fresh Status...");
     status = await getStatusAndLocation();
     await env.KV.put("status", JSON.stringify(status), {expirationTtl: 60});
-  } else console.log("Serving Cached Status...");
+  }
   return new Response(JSON.stringify(status), {headers: {"Content-Type": "application/json"}});
 });
 router.all("*", () => Response.redirect("https://statusmap.cloudflare.community"));
