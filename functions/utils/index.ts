@@ -1,12 +1,11 @@
-import polyfill from "./Locations.json";
 import getStatus from "./getStatus";
 import generateGeoJSON from "./generateGeoJSON";
 export default async function getStatusAndLocation(): Promise<GeoJSONResponse> {
 	const status = await getStatus();
-	const locations = (await (await fetch("https://speed.cloudflare.com/locations")).json() as ColoLocation[]).concat(polyfill as ColoLocation[]);
-	for (const location of locations) {
+	const locations = await (await fetch("https://staging.cloudflare.manfredi.io/api/pops/_all.json")).json<ColoLocation>();
+	for (const location of Object.values(locations)) {
 		if (status[location.iata]) {
-			status[location.iata].location = { lat: location.lat, lon: location.lon, cca2: location.cca2, region: location.region, city: location.city };
+			status[location.iata].location = { lat: location.coords.lat, lon: location.coords.lng };
 		}
 	}
 	return generateGeoJSON(status);

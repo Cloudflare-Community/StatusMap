@@ -15,15 +15,13 @@ interface ColoStatus {
 interface StatusLocation {
 	lat: number;
 	lon: number;
-	cca2: string;
-	region: string;
-	city: string;
 }
 interface ColoLocation {
-	iata: string;
-	lat: number;
-	lon: number;
-	cca2: string;
-	region: string;
-	city: string;
+	[iata: string]: {
+		iata: string;
+		coords: {
+			lat: number;
+			lng: number;
+		}
+	}
 }
