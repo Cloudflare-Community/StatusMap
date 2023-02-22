@@ -1,0 +1,3 @@
+type Environment = {
+	KV: KVNamespace
+};
